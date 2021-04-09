@@ -1,6 +1,4 @@
-import { isObject } from 'rxjs/internal-compatibility';
-import { isString } from '@/utils/extensions/string';
-import { isNil } from 'ramda';
+import { isArray, isNil, isObject, isString } from '@/utils/extensions/type';
 
 export const awaitWrapper = <T = Object, E = Object>(promise: Promise<T>): Promise<Array<T | E>> => {
   // @ts-ignore
@@ -13,7 +11,7 @@ export const snakeNameWithObject = (data: Object | Array<Object> | string, encod
     return data;
   }
 
-  if (Array.isArray(data)) {
+  if (isArray(data)) {
     data.forEach((item, index) => {
       // @ts-ignore
       data[index] = snakeNameWithObject(item, encode);

@@ -1,4 +1,4 @@
-import { isString } from '@/utils/extensions/string';
+import { isString } from '@/utils/extensions/type';
 
 /**
  * 获取指定元素的off

@@ -11,4 +11,4 @@ export const toCamelCase = (value: string, sym = '-'): string => {
     (a, b, index) => (index > 0 ? sym : '') + b.toLowerCase());
 };
 
-export function isString(value: Object): value is string { return  typeof value === 'string' }
+export function isString(value: Object): value is string { return  value instanceof String }
