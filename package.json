@@ -13,10 +13,14 @@
     "lint-fix": "npm-run-all --parallel lint-fix:*"
   },
   "dependencies": {
-    "vue": "^3.0.5"
+    "ramda": "^0.27.1",
+    "rxjs": "^6.6.7",
+    "vue": "^3.0.5",
+    "vue-router": "^4.0.6"
   },
   "devDependencies": {
     "@types/node": "^14.14.37",
+    "@types/ramda": "^0.27.40",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "@vitejs/plugin-vue": "^1.2.1",
