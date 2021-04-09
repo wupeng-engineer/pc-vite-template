@@ -9,6 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve('src'),
+      '@assets': resolve('src/assets'),
       vue: '@vue/runtime-dom'
     },
     mainFields: ['index'],

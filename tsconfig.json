@@ -15,8 +15,6 @@
     "alwaysStrict": true,
     //  删除注释
     "removeComments": true,
-    //  编译结果输出地址
-    "outDir": "dist/",
     //  支持的jsx的类型
     "jsx": "preserve",
     "jsxFactory": "h",
@@ -39,7 +37,8 @@
     "esModuleInterop": true,
     //  类型声明文件的查找地址
     "typeRoots": [
-      "node_modules/@types"
+      "node_modules/@types",
+      "src/@types"
     ],
     "plugins": [],
 
