@@ -1,6 +1,5 @@
 import { UserConfigExport } from 'vite';
 import { merge } from 'webpack-merge';
-import legacy from '@vitejs/plugin-legacy'
 import visualizer from 'rollup-plugin-visualizer';
 import baseConfig from './vite.base';
 
