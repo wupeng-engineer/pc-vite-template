@@ -19,7 +19,7 @@ export function isString(value: unknown): value is string {
  * @param value
  */
 export function isArray<T = unknown>(value: unknown): value is Array<T> {
-  return !isNil(value) && value instanceof Array;
+  return !isNil(value) && typeof value === 'object' && value instanceof Array;
 }
 
 /**

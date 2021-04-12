@@ -1,4 +1,5 @@
 import { isArray, isNil, isObject } from '@/utils/extensions/type';
+import { NotNullBasicType } from '@/types/common';
 
 export const awaitWrapper = <T = unknown, E = unknown>(promise: Promise<T>): Promise<Array<T | E>> => {
   return promise.then((data: T) => [null, data]).catch((err: E) => [err, null]);
@@ -40,36 +41,42 @@ export function snakeNameWithObject<T = unknown>(data: T | Array<T>, encode = fa
 /**
  * 转换
  * @param uri
- * @param data
+ * @param query
  */
-export const formatGetJson = (uri: string, data: { [T: string]: string | Array<string> } = {}): string => {
-  const keys = Object.keys(data);
+export const queryFormat = (uri: string, query?: Record<string, NotNullBasicType | Array<NotNullBasicType>>): string => {
+  const keys = Object.keys(query || {});
   if (!keys.length) return uri;
-  const joiner = uri.lastIndexOf('?') === -1 ? '?' : '&';
+
+  const joiner = uri.lastIndexOf('?') === -1 ? '?' : uri.indexOf('?') === uri.length - 1 ? '' : '&';
+
   return (
     uri +
     joiner +
     keys
       .map(item => {
-        if (isNil(data[item])) {
-          return '';
-        }
-        if (!Array.isArray(data[item])) {
-          return `${ item }=${ data[item] }`;
+        if (isNil(query[item])) {
+          return ' ';
         }
 
-        //  如果当前为数组,那么就解析数组参数
-        if (!data[item].length) {
-          return '';
+        if (!isArray(query[item])) {
+          return `${ item }=${ query[item] }`;
         }
-        // @ts-ignore
-        const arrData: Array<string> = data[item];
-        return arrData
-          .map((d, i) => `${ item }[${ i }]=${ d }`)
-          .filter(item => item !== '')
-          .join('&');
+
+        if (isArray(query[item])) {
+          if (!(<Array<NotNullBasicType>>query[item]).length) {
+            return '';
+          }
+          //  如果当前为数组,那么就解析数组参数
+          return (<Array<NotNullBasicType>>query[item])
+            .map((d, i) => `${ item }[${ i }]=${ d }`)
+            .filter(item => item !== '')
+            .join('&');
+        }
+
       })
       .filter(item => item !== '')
       .join('&')
+      .replace(/ /g, '')
+      .replace(/&&/g, '&')
   );
 };

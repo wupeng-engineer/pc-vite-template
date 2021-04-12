@@ -1,4 +1,4 @@
-import { snakeNameWithObject } from '@/utils/helper';
+import { queryFormat, snakeNameWithObject } from '@/utils/helper';
 
 it('test snakeNameWithObject', () => {
 
@@ -62,4 +62,26 @@ it('test snakeNameWithObject', () => {
   ])).toEqual([
     123, 'user_test_array', 'user-test-array', true
   ]);
+});
+
+
+it('test queryFormat', () => {
+  expect(queryFormat('http://localhost:3000/app/hello', {
+    id: 1,
+    name: '张三',
+    age: [1, 2]
+  })).toEqual('http://localhost:3000/app/hello?id=1&name=张三&age[0]=1&age[1]=2');
+
+  expect(queryFormat('http://localhost:3000/app/hello?', {
+    id: 1,
+    name: '张三',
+    age: [1, 2]
+  })).toEqual('http://localhost:3000/app/hello?id=1&name=张三&age[0]=1&age[1]=2');
+
+
+  expect(queryFormat('http://localhost:3000/app/hello?b=2', {
+    id: 1,
+    name: '张三',
+    age: [1, 2]
+  })).toEqual('http://localhost:3000/app/hello?b=2&id=1&name=张三&age[0]=1&age[1]=2');
 });
