@@ -21,6 +21,7 @@
     //  启用ES装饰器
     "experimentalDecorators": true,
     "strictFunctionTypes": true,
+    "resolveJsonModule": true,
     //  不生成d.ts
     "declaration": false,
     "forceConsistentCasingInFileNames": true,
@@ -63,7 +64,7 @@
     "src/**/*.js",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "test/**/*.ts",
+    "test/**/*.tsx"
   ]
 }

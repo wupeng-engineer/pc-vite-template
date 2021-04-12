@@ -4,3 +4,7 @@ dist
 dist-ssr
 *.local
 .idea
+jest-stare
+coverage
+yarn.lock
+yarn-error.log

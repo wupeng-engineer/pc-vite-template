@@ -4,13 +4,16 @@ module.exports = {
     //  浏览器
     browser: true,
     //  启用ES6特性（除modules）
-    es6: true
+    es6: true,
+    'jest/globals': true
   },
 
   extends: [
     'eslint:recommended',
     'plugin:vue/vue3-recommended',
-    'plugin:@typescript-eslint/recommended'
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jest/recommended',
+    'plugin:jest/style'
   ],
   parser: 'vue-eslint-parser',
   //  解析器配置
@@ -38,6 +41,7 @@ module.exports = {
   plugins: [
     'eslint-plugin-vue',
     'eslint-plugin-promise',
+    'eslint-plugin-jest',
     '@typescript-eslint/eslint-plugin'
   ],
   rules: {
@@ -79,7 +83,16 @@ module.exports = {
         'max': 1,
         'allowFirstLine': false
       }
-    }]
+    }],
+
+    'jest/consistent-test-it': [2, { fn: 'it'}],
+    'jest/no-disabled-tests': 1,
+    'jest/no-focused-tests': 2,
+    'jest/no-identical-title': 2,
+    'jest/prefer-to-have-length': 1,
+    'jest/valid-describe': 2,
+    'jest/valid-expect': 2,
+    'jest/valid-expect-in-promise':2,
   },
 
   'noInlineConfig': false,

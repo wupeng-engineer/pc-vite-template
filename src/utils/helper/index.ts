@@ -1,16 +1,10 @@
-import { isArray, isNil, isObject, isString } from '@/utils/extensions/type';
+import { isArray, isNil, isObject } from '@/utils/extensions/type';
 
-export const awaitWrapper = <T = Object, E = Object>(promise: Promise<T>): Promise<Array<T | E>> => {
-  // @ts-ignore
+export const awaitWrapper = <T = unknown, E = unknown>(promise: Promise<T>): Promise<Array<T | E>> => {
   return promise.then((data: T) => [null, data]).catch((err: E) => [err, null]);
 };
 
-
-export const snakeNameWithObject = (data: Object | Array<Object> | string, encode = false): Object => {
-  if (isString(data)) {
-    return data;
-  }
-
+export function snakeNameWithObject<T = unknown>(data: T | Array<T>, encode = false): T | Array<T> {
   if (isArray(data)) {
     data.forEach((item, index) => {
       // @ts-ignore
@@ -20,7 +14,8 @@ export const snakeNameWithObject = (data: Object | Array<Object> | string, encod
     data = Object.assign({}, data);
 
     for (const key in data) {
-      // @ts-ignore
+      // eslint-disable-next-line no-prototype-builtins
+      if (!data.hasOwnProperty(key)) continue;
       if (isObject(data[key])) {
         // @ts-ignore
         data[key] = snakeNameWithObject(data[key], encode);
@@ -35,14 +30,12 @@ export const snakeNameWithObject = (data: Object | Array<Object> | string, encod
       if (newKey !== key) {
         // @ts-ignore
         data[newKey] = data[key];
-        // @ts-ignore
         delete data[key];
       }
     }
   }
   return data;
-};
-
+}
 
 /**
  * 转换
@@ -55,28 +48,28 @@ export const formatGetJson = (uri: string, data: { [T: string]: string | Array<s
   const joiner = uri.lastIndexOf('?') === -1 ? '?' : '&';
   return (
     uri +
-        joiner +
-        keys
-          .map(item => {
-            if (isNil(data[item])) {
-              return '';
-            }
-            if (!Array.isArray(data[item])) {
-              return `${item}=${data[item]}`;
-            }
+    joiner +
+    keys
+      .map(item => {
+        if (isNil(data[item])) {
+          return '';
+        }
+        if (!Array.isArray(data[item])) {
+          return `${ item }=${ data[item] }`;
+        }
 
-            //  如果当前为数组,那么就解析数组参数
-            if (!data[item].length) {
-              return '';
-            }
-            // @ts-ignore
-            const arrData: Array<string> = data[item];
-            return arrData
-              .map((d, i) => `${item}[${i}]=${d}`)
-              .filter(item => item !== '')
-              .join('&');
-          })
+        //  如果当前为数组,那么就解析数组参数
+        if (!data[item].length) {
+          return '';
+        }
+        // @ts-ignore
+        const arrData: Array<string> = data[item];
+        return arrData
+          .map((d, i) => `${ item }[${ i }]=${ d }`)
           .filter(item => item !== '')
-          .join('&')
+          .join('&');
+      })
+      .filter(item => item !== '')
+      .join('&')
   );
 };

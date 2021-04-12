@@ -11,7 +11,7 @@ export function isNil(value: unknown): value is null | undefined {
  * @param value
  */
 export function isString(value: unknown): value is string {
-  return !isNil(value) && value instanceof String;
+  return !isNil(value) && typeof value === 'string';
 }
 
 /**
@@ -27,7 +27,7 @@ export function isArray<T = unknown>(value: unknown): value is Array<T> {
  * @param value
  */
 export function isObject(value: unknown): value is Object {
-  return !isNil(value) && value instanceof Object;
+  return !isNil(value) && typeof value === 'object' && !isArray(value);
 }
 
 /**
@@ -37,3 +37,21 @@ export function isObject(value: unknown): value is Object {
 export function isFunction(value: unknown): value is Function {
   return !isNil(value) && value instanceof Function;
 }
+
+/**
+ * 判断类型是否为boolean
+ * @param value
+ */
+export function isBoolean(value: unknown): value is Boolean {
+  return !isNil(value) && typeof value === 'boolean';
+}
+
+
+/**
+ * 判断类型是否为boolean
+ * @param value
+ */
+export function isNumber(value: unknown): value is Number {
+  return !isNil(value) && typeof value === 'number';
+}
+
