@@ -1,1 +1,9 @@
-export type NotNullBasicType = String | Boolean | Number;
+export type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+
+export type XOR<T, U> = T | U extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+
+
+/**
+ * 值类型
+ */
+export type ValueType = string | number | boolean | undefined | null;

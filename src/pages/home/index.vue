@@ -1,49 +1,39 @@
 <template>
-  <h1>This is home</h1>
+  <h1 class="text-red-500 text-2xl text-yellow-50">This is home</h1>
   <div>{{ name }}</div>
 </template>
 
 <script lang="ts">
 
-import { computed, onMounted, watch } from 'vue';
-import TestStore from '@/store/test';
-import { useRequest } from '@/hooks/request';
+import { computed, defineComponent, onMounted, watch } from 'vue';
 
-export default {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export default defineComponent({
   setup() {
 
-    const { loading } = useRequest<string>('http://localhost:3000/app/hello', {
-      query:{
-        name:'123',
-        age: 1,
-        add: [1, 2]
-      }
-    });
+    // const { loading } = useRequest<string>('http://localhost:3000/app/hello', {
+    //   query:{
+    //     name:'123',
+    //     age: 1,
+    //     add: [1, 2]
+    //   }
+    // });
 
-    const name = computed(() => {
-      return TestStore?.data?.name;
-    });
+    // const name = computed(() => {
+    //   return TestStore?.data?.name;
+    // });
 
-    watch(loading, (newVal) => {
-      console.log('newVal', newVal);
-    });
+    // watch(loading, (newVal) => {
+    //   console.log('newVal', newVal);
+    // });
 
-    onMounted(() => {});
+    // onMounted(() => {});
 
     return {
       name
     };
   },
-};
+});
 </script>
 
 <style lang="less" scoped>
-h1 {
-  color: red;
-}
-
-button {
-  height: 24px;
-}
 </style>

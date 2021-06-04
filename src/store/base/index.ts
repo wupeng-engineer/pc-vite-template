@@ -1,19 +1,15 @@
-
 import { Observable } from 'rxjs';
 import { reactive, readonly } from 'vue';
 import { isNil } from '@/utils/extensions/type';
 
-
 type StoreContainer<T> = {
-  value: T
-}
+  value: T;
+};
 
 export abstract class BaseStore<T extends Object> {
-
   protected _state: StoreContainer<T>;
 
   constructor() {
-
     this._state = reactive({ value: null }) as StoreContainer<T>;
 
     const res = this.init();
@@ -24,32 +20,33 @@ export abstract class BaseStore<T extends Object> {
     }
 
     if (res instanceof Observable) {
+      const subscribe = res.subscribe({
+        next: (d: T) => {
+          subscribe.unsubscribe();
+          this._state.value = d;
+          this.setup(d);
+        },
+        error: (err) => {
+          subscribe.unsubscribe();
+          this.setup(undefined, err);
+        },
 
-      const subscribe = res.subscribe((d: T) => {
-        subscribe.unsubscribe();
-        this._state.value = d;
-        this.setup(d);
-      }, err => {
-        subscribe.unsubscribe();
-        this.setup(undefined, err);
-      }, () => {
-        subscribe.unsubscribe();
+        complete: () => {
+          subscribe.unsubscribe();
+        },
       });
-
     } else if (res instanceof Promise) {
-
-      res.then((d: T) => {
-        this._state.value = d;
-        this.setup(d);
-      }).catch(err => {
-        this.setup(undefined, err);
-      });
-
+      res
+        .then((d: T) => {
+          this._state.value = d;
+          this.setup(d);
+        })
+        .catch((err) => {
+          this.setup(undefined, err);
+        });
     } else {
-
       this._state.value = res;
       this.setup(res);
-
     }
   }
 
@@ -57,7 +54,7 @@ export abstract class BaseStore<T extends Object> {
     return readonly(this._state.value) as T;
   }
 
-  protected abstract init(): Observable<T> | Promise<T> | T
+  protected abstract init(): Observable<T> | Promise<T> | T;
 
   /**
    *  数据初始化完毕之后调用的钩子函数
@@ -67,5 +64,4 @@ export abstract class BaseStore<T extends Object> {
    */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected setup(data?: T, err?: unknown): void {}
-
 }

@@ -1,12 +1,18 @@
-import { isArray, isNil, isObject } from '@/utils/extensions/type';
-import { NotNullBasicType } from '@/types/common';
+import { isArray, isNil, isObject, isString } from 'lodash';
+import { ValueType } from '@/types/common';
 
-export const awaitWrapper = <T = unknown, E = unknown>(promise: Promise<T>): Promise<Array<T | E>> => {
+export const awaitWrapper = <T = unknown, E = unknown>(
+  promise: Promise<T>
+): Promise<Array<T | E>> => {
   return promise.then((data: T) => [null, data]).catch((err: E) => [err, null]);
 };
 
 export function snakeNameWithObject<T = unknown>(data: T | Array<T>, encode = false): T | Array<T> {
-  if (isArray(data)) {
+  if (isString(data)) {
+    return data;
+  }
+
+  if (Array.isArray(data)) {
     data.forEach((item, index) => {
       // @ts-ignore
       data[index] = snakeNameWithObject(item, encode);
@@ -15,8 +21,6 @@ export function snakeNameWithObject<T = unknown>(data: T | Array<T>, encode = fa
     data = Object.assign({}, data);
 
     for (const key in data) {
-      // eslint-disable-next-line no-prototype-builtins
-      if (!data.hasOwnProperty(key)) continue;
       if (isObject(data[key])) {
         // @ts-ignore
         data[key] = snakeNameWithObject(data[key], encode);
@@ -31,6 +35,7 @@ export function snakeNameWithObject<T = unknown>(data: T | Array<T>, encode = fa
       if (newKey !== key) {
         // @ts-ignore
         data[newKey] = data[key];
+        // @ts-ignore
         delete data[key];
       }
     }
@@ -43,7 +48,10 @@ export function snakeNameWithObject<T = unknown>(data: T | Array<T>, encode = fa
  * @param uri
  * @param query
  */
-export const queryFormat = (uri: string, query?: Record<string, NotNullBasicType | Array<NotNullBasicType>>): string => {
+export const queryFormat = (
+  uri: string,
+  query?: Record<string, ValueType | Array<ValueType>>
+): string => {
   const keys = Object.keys(query || {});
   if (!keys.length) return uri;
 
@@ -53,28 +61,27 @@ export const queryFormat = (uri: string, query?: Record<string, NotNullBasicType
     uri +
     joiner +
     keys
-      .map(item => {
+      .map((item) => {
         if (isNil(query[item])) {
           return ' ';
         }
 
         if (!isArray(query[item])) {
-          return `${ item }=${ query[item] }`;
+          return `${item}=${query[item]}`;
         }
 
         if (isArray(query[item])) {
-          if (!(<Array<NotNullBasicType>>query[item]).length) {
+          if (!(<Array<ValueType>>query[item]).length) {
             return '';
           }
           //  如果当前为数组,那么就解析数组参数
-          return (<Array<NotNullBasicType>>query[item])
-            .map((d, i) => `${ item }[${ i }]=${ d }`)
-            .filter(item => item !== '')
+          return (<Array<ValueType>>query[item])
+            .map((d, i) => `${item}[${i}]=${d}`)
+            .filter((item) => item !== '')
             .join('&');
         }
-
       })
-      .filter(item => item !== '')
+      .filter((item) => item !== '')
       .join('&')
       .replace(/ /g, '')
       .replace(/&&/g, '&')

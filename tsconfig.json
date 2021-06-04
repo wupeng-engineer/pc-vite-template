@@ -56,6 +56,7 @@
   //  排除编译的文件
   "exclude": [
     "node_modules",
+    "build",
     "src/assets/json/*.json"
   ],
   //  包含编译的入口文件
