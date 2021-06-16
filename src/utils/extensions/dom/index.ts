@@ -1,4 +1,4 @@
-import { isString } from '@/utils/extensions/type';
+import { isString } from 'lodash';
 
 /**
  * 获取指定元素的off

@@ -1,4 +1,4 @@
-import { isEmpty } from 'ramda';
+import * as R from 'ramda';
 
 /***
  * TODO: 命名问题
@@ -6,9 +6,6 @@ import { isEmpty } from 'ramda';
  * @param sym
  */
 export const toCamelCase = (value: string, sym = '-'): string => {
-  if (isEmpty(value)) throw new Error('');
-  return value.replace(/([A-Z])/g,
-    (a, b, index) => (index > 0 ? sym : '') + b.toLowerCase());
+  if (R.isEmpty(value)) throw new Error('');
+  return value.replace(/([A-Z])/g, (a, b, index) => (index > 0 ? sym : '') + b.toLowerCase());
 };
-
-export function isString(value: Object): value is string { return  value instanceof String }
