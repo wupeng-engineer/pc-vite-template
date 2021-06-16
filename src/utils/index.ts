@@ -1,5 +1,5 @@
 import { isNil } from 'ramda';
-import { isNumeric } from 'rxjs/internal-compatibility';
+import { isNumeric } from './extensions/type';
 
 interface IRewriteFuncOption {
     timer: number;

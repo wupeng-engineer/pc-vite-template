@@ -1,39 +1,19 @@
 <template>
-  <h1 class="text-red-500 text-2xl text-yellow-50">This is home</h1>
-  <div>{{ name }}</div>
+  <h1 class="text-blue-400 text-2xl">
+    This is home
+  </h1>
+  <counter-store-test />
 </template>
 
 <script lang="ts">
-
-import { computed, defineComponent, onMounted, watch } from 'vue';
-
+import { defineComponent } from 'vue';
+import CounterStoreTest from '@/components/store-test/counter/index.vue';
 export default defineComponent({
+  components: {
+    CounterStoreTest
+  },
   setup() {
 
-    // const { loading } = useRequest<string>('http://localhost:3000/app/hello', {
-    //   query:{
-    //     name:'123',
-    //     age: 1,
-    //     add: [1, 2]
-    //   }
-    // });
-
-    // const name = computed(() => {
-    //   return TestStore?.data?.name;
-    // });
-
-    // watch(loading, (newVal) => {
-    //   console.log('newVal', newVal);
-    // });
-
-    // onMounted(() => {});
-
-    return {
-      name
-    };
   },
 });
 </script>
-
-<style lang="less" scoped>
-</style>
