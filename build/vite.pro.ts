@@ -1,8 +1,8 @@
 import { UserConfigExport } from 'vite';
 import { merge } from 'webpack-merge';
 import visualizer from 'rollup-plugin-visualizer';
+import optimizeLodashImports from "rollup-plugin-optimize-lodash-imports";
 import baseConfig from './vite.base';
-
 let viteConfig = merge<UserConfigExport>(baseConfig, {
   mode: 'production',
   plugins: [
@@ -21,17 +21,18 @@ let viteConfig = merge<UserConfigExport>(baseConfig, {
     },
     rollupOptions: {
       // external: ["rxjs", "rxjs/operators", 'rxjs/internal-compatibility'],
-      // plugins: [
-      //   commonjs({
-      //     include: /node_modules/
-      //   }),
-      //   resolve({
-      //     // 将自定义选项传递给解析插件
-      //     customResolveOptions: {
-      //       moduleDirectory: 'node_modules'
-      //     }
-      //   })
-      // ]
+      plugins: [
+        optimizeLodashImports()
+        // commonjs({
+        //   include: /node_modules/
+        // }),
+        // resolve({
+        //   // 将自定义选项传递给解析插件
+        //   customResolveOptions: {
+        //     moduleDirectory: 'node_modules'
+        //   }
+        // })
+      ]
     }
   }
 });
