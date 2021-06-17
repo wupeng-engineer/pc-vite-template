@@ -23,7 +23,7 @@ export default defineConfig({
       '@assets': resolve('src/assets'),
       vue: '@vue/runtime-dom'
     },
-    mainFields: ['index'],
+    mainFields: ['index', 'module', 'jsnext:main', 'jsnext'],
     extensions: ['.vue', '.ts', '.tsx', '.json', '.jsx', '.mjs', '.js',]
   }
 });
