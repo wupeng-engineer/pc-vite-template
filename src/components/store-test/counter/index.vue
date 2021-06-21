@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useCounterStore } from '@/stores/counter';
+import { useCounterStore } from '@/store/modules/counter';
 
 export default defineComponent({
   setup() {

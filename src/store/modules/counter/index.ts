@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 
 export const useCounterStore = defineStore({
-  id: 'counter',
+  id: 'app-counter',
   state: () => ({ count: 1 }),
   getters: {
     double(state): number  {
