@@ -6,7 +6,7 @@ export const routes: Array<RouteRecordRaw> = [
   {
     name: 'home',
     path: '/home',
-    component: () => import(/* webpackChunkName: "home" */ '@/pages/home/index.vue'),
+    component: () => import('@/pages/home/index.vue'),
     children: homeRoutes,
     meta: {}
 
@@ -16,7 +16,7 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'account',
     path: '/account',
     component: () =>
-      import(/* webpackChunkName: "account" */ '@/pages/account/index.vue'),
+      import('@/pages/account/index.vue'),
     children: accountRoutes
   }
 ];

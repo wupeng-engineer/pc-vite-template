@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 
-const homeRoutes: Array<RouteRecordRaw> = [
+const routers: Array<RouteRecordRaw> = [
   {
     name: 'account-login',
     path: 'login',
@@ -9,4 +9,4 @@ const homeRoutes: Array<RouteRecordRaw> = [
   }
 ];
 
-export default homeRoutes;
+export default routers;

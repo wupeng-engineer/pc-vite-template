@@ -1,8 +1,8 @@
 import { createApp } from 'vue';
-import App from './app.vue';
-import router from './router';
 import { debounce } from 'lodash';
 import { createPinia } from 'pinia';
+import App from './app.vue';
+import router from './routes';
 import '@/assets/styles/index.less';
 
 const pinia = createPinia();
