@@ -1,6 +1,6 @@
+import { App } from 'vue';
 import { createPinia } from 'pinia';
 import { debounce } from 'lodash';
-import { App } from 'vue';
 
 const pinia = createPinia();
 pinia.use(({ options, store }) => {

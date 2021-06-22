@@ -3,8 +3,6 @@ import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-rout
 import routes from './routes';
 import { setupRouterGuard } from './guard';
 
-
-
 export const router: Router = createRouter({
   history: createWebHistory(),
   routes: routes as Array<RouteRecordRaw>,
@@ -12,9 +10,12 @@ export const router: Router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 
-export async function  setupRouter(app: App<Element>): Promise<App<Element>> {
+export function setupRouter(app: App<Element>): App<Element> {
   app.use(router);
   setupRouterGuard(router);
-  await router.isReady();
   return app;
+}
+
+export async function isReady(): Promise<void> {
+  await router.isReady();
 }

@@ -3,16 +3,20 @@ const router: AppRouteRecordRaw = {
   path: '/home',
   name: 'home',
   component: () => import('@/pages/home/index.vue'),
+  meta: {
+    auth: true,
+  },
   children: [
     {
-      path: '/',
-      component: () => import('@/pages/home/index.vue'),
-      meta: {
-        
-      }
+      path: '',
+      redirect: { name: 'home-demo1' },
+    },
+    {
+      path: 'demo1',
+      name: 'home-demo1',
+      component: () => import('@/pages/home/demo1/index.vue'),
     },
   ],
-  meta: {},
 };
 
 export default router;

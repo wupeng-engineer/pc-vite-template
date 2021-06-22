@@ -1,8 +1,11 @@
 <template>
-  <h1 class="text-blue-400 text-2xl">
+  <h1 class="text-2xl text-blue-400">
     This is home
   </h1>
+ 
   <counter-store-test />
+
+  <router-view />
 </template>
 
 <script lang="ts">

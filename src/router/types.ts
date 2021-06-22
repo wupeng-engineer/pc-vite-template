@@ -1,9 +1,9 @@
 import { Component } from 'vue';
 import { RouteRecordRaw } from 'vue-router';
-import { Recordable } from '@/types/global';
+import { Recordable, XOR } from '@/@types/global';
 
 export type AppRouteMeta = {
-  auth?: string;
+  auth?: XOR<boolean, string>;
 }
 
 // @ts-ignore

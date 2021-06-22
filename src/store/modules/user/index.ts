@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore({
   id: 'app-user',
-  state: () => ({ token: '1' }),
+  state: () => ({ token: '' }),
   getters: {
     getToken(state): string {
       return state.token;

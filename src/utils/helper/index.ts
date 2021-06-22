@@ -1,5 +1,5 @@
+import { ValueType } from '@/@types/global';
 import { isArray, isNil, isObject, isString } from 'lodash';
-import { ValueType } from '@/types/common';
 
 export const awaitWrapper = <T = unknown, E = unknown>(
   promise: Promise<T>
@@ -86,4 +86,25 @@ export const queryFormat = (
       .replace(/ /g, '')
       .replace(/&&/g, '&')
   );
+};
+
+export const moduleFilter = <T = unknown>(
+  modules: Record<string, T>,
+  filter?: RegExp
+): Record<string, T> => {
+  return Object.keys(modules)
+    .map((key) => {
+      if (filter && !filter.test(key)) return null;
+
+      //@ts-ignore
+      if (!modules[key] || modules[key][Symbol.toStringTag] !== 'Module' || !modules[key].default)
+        return null;
+      console.log('module', modules[key]);
+      return { key, module: modules[key] };
+    })
+    .filter((f) => f)
+    .reduce<Record<string, T>>((accumulator, current) => {
+      accumulator[current.key] = current.module;
+      return accumulator;
+    }, {});
 };
