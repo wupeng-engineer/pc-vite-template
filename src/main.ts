@@ -1,11 +1,14 @@
 import { createApp } from 'vue';
+import { setupComponent } from '@/component';
 import { setupStore } from '@/store';
 import { isReady, setupRouter } from '@/router';
 import App from './app.vue';
 import '@/assets/styles/index.less';
 
-
 const app = createApp(App);
+
+setupComponent(app);
+
 setupRouter(app);
 
 setupStore(app);

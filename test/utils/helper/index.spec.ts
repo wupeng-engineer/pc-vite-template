@@ -1,4 +1,4 @@
-import { queryFormat, snakeNameWithObject } from '@/utils/helper';
+import { queryFormat, snakeNameWithObject } from '@/util/helper';
 
 it('test snakeNameWithObject', () => {
 

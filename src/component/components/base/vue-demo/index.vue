@@ -1,8 +1,5 @@
 <template>
-  <div>我是demo1</div>
-  <button @click="$router.push('/home/demo2')">
-    Go To Demo2
-  </button>
+  <div>123</div>
 </template>
 
 <script lang="ts">

@@ -10,8 +10,35 @@ export const useUserStore = defineStore({
   },
 
   actions: {
-    setToken(token: string) {
-      this.token = token;
+    /**
+     *  获取用户信息
+     * @returns
+     */
+    getUserInfo(): Promise<string> {
+      return new Promise((resolve, reject) => {
+        if (this.token) {
+          resolve(this.token);
+          return;
+        }
+
+        setTimeout(() => {
+          this.token = '123';
+          resolve(this.token);
+        }, 1000);
+      });
+    },
+
+    /**
+     * 登录
+     */
+    login() {},
+
+    /**
+     * 登出
+     * @param goLogin
+     */
+    logout(goLogin = false) {
+      // goLogin && router.push(PageEnum.BASE_LOGIN);
     },
   },
 });

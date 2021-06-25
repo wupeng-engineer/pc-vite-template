@@ -1,4 +1,5 @@
 import { AppRouteRecordRaw } from '@/router/types';
+import Demo1Router from './demo1';
 const router: AppRouteRecordRaw = {
   path: '/home',
   name: 'home',
@@ -11,10 +12,11 @@ const router: AppRouteRecordRaw = {
       path: '',
       redirect: { name: 'home-demo1' },
     },
+    Demo1Router,
     {
-      path: 'demo1',
-      name: 'home-demo1',
-      component: () => import('@/pages/home/demo1/index.vue'),
+      path: 'demo2',
+      name: 'home-demo2',
+      component: () => import('@/pages/home/demo2/index.vue'),
     },
   ],
 };

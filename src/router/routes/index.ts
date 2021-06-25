@@ -1,6 +1,6 @@
 import { flatMap, isArray } from 'lodash';
 import { XOR } from '@/@types/global';
-import { moduleFilter } from '@/utils/helper';
+import { moduleFilter } from '@/util/helper';
 import { AppRouteRecordRaw } from '../types';
 
 /**
@@ -8,7 +8,7 @@ import { AppRouteRecordRaw } from '../types';
  * @returns
  */
 const findModuleRoutes = (): Array<AppRouteRecordRaw> => {
-  const modules = moduleFilter(import.meta.globEager('./modules/**/*.ts'));
+  const modules = moduleFilter(import.meta.globEager('./modules/*/*.ts'));
 
   return flatMap(
     Object.keys(modules).map((key) => {

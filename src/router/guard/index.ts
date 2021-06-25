@@ -1,8 +1,8 @@
 import { Router } from 'vue-router';
 import { createAuthGuard } from './auth';
-import { createStateGuard } from './state';
+import { createPermissionGuard } from './permission';
 
 export function setupRouterGuard(router: Router): void {
   createAuthGuard(router);
-  createStateGuard(router);
+  createPermissionGuard(router);
 }
