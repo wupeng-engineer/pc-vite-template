@@ -1,18 +1,16 @@
-import { ValueType } from '@/@types/global';
 import { isArray, isNil, isObject, isString } from 'lodash';
+import { ValueType } from '@/@types/global';
 
 export const awaitWrapper = <T = unknown, E = unknown>(
   promise: Promise<T>
-): Promise<Array<T | E>> => {
-  return promise.then((data: T) => [null, data]).catch((err: E) => [err, null]);
-};
+): Promise<Array<T | E>> => promise.then((data: T) => [null, data]).catch((err: E) => [err, null]);
 
 export function snakeNameWithObject<T = unknown>(data: T | Array<T>, encode = false): T | Array<T> {
   if (isString(data)) {
     return data;
   }
 
-  if (Array.isArray(data)) {
+  if (isArray(data)) {
     data.forEach((item, index) => {
       // @ts-ignore
       data[index] = snakeNameWithObject(item, encode);
@@ -29,8 +27,8 @@ export function snakeNameWithObject<T = unknown>(data: T | Array<T>, encode = fa
       const newKey = encode
         ? key.replace(/([A-Z])/g, '_$1').toLowerCase()
         : key.replace(/_(\w)/g, ($0, $1) => {
-          return $1.toUpperCase();
-        });
+            return $1.toUpperCase();
+          });
 
       if (newKey !== key) {
         // @ts-ignore
@@ -90,9 +88,9 @@ export const queryFormat = (
 
 /**
  * modules 过滤
- * @param modules 
- * @param filter 
- * @returns 
+ * @param modules
+ * @param filter
+ * @returns
  */
 export const moduleFilter = <T extends { default: unknown }>(
   modules: Record<string, T>,
@@ -101,7 +99,7 @@ export const moduleFilter = <T extends { default: unknown }>(
   return Object.keys(modules)
     .map((key) => {
       if (filter && !filter.test(key)) return null;
-      
+
       //@ts-ignore
       if (!modules[key] || modules[key][Symbol.toStringTag] !== 'Module' || !modules[key].default)
         return null;

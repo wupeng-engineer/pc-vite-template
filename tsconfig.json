@@ -32,6 +32,7 @@
         "src/*"
       ]
     },
+    "types": ["vite/client"],
     "sourceMap": false,
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": false,

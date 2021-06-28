@@ -5,20 +5,20 @@ const router: RouteRecordRaw = {
   name: 'home',
   component: () => import('@/pages/home/index.vue'),
   meta: {
-    auth: true,
+    auth: true
   },
   children: [
     {
       path: '',
-      redirect: { name: 'home-demo1' },
+      redirect: { name: 'home-demo1' }
     },
     Demo1Router,
     {
       path: 'demo2',
       name: 'home-demo2',
-      component: () => import('@/pages/home/demo2/index.vue'),
-    },
-  ],
+      component: () => import('@/pages/home/demo2/index.vue')
+    }
+  ]
 };
 
 export default router;

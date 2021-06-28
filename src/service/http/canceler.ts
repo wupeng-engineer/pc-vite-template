@@ -4,7 +4,8 @@ import { RequestConfig } from '@/@types/http';
 
 let pendingMap = new Map<string, Canceler>();
 
-export const getPendingUrl = (config: RequestConfig): string => [config.method, config.url].join('&');
+export const getPendingUrl = (config: RequestConfig): string =>
+  [config.method, config.url].join('&');
 
 export class HttpClientCanceler {
   /**

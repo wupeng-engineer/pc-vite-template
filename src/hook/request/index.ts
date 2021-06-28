@@ -9,7 +9,6 @@
 // import { Singleton } from '@/utils/singleton';
 // import { ValueType } from '@/types/common';
 
-
 // interface IRequestConfig {
 //   /**
 //    * 请求方式,默认为 get

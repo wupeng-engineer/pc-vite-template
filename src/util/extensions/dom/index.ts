@@ -9,7 +9,6 @@ export interface ViewportOffsetResult {
   bottomIncludeBody: number;
 }
 
-
 export function getBoundingClientRect(element: Element): DOMRect | number {
   if (!element || !element.getBoundingClientRect) {
     return 0;
@@ -69,7 +68,6 @@ export function removeClass(el: Element, cls: string): void {
   }
 }
 
-
 export function getViewportOffset(element: Element): ViewportOffsetResult {
   const doc = document.documentElement;
 
@@ -101,14 +99,13 @@ export function getViewportOffset(element: Element): ViewportOffsetResult {
     right: clientWidth - rectWidth - left,
     bottom: clientHeight - rectHeight - top,
     rightIncludeBody: clientWidth - left,
-    bottomIncludeBody: clientHeight - top,
+    bottomIncludeBody: clientHeight - top
   };
 }
 
 function trim(string: string) {
   return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
 }
-
 
 /* istanbul ignore next */
 export function on(

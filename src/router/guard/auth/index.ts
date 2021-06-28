@@ -3,7 +3,7 @@ import { useUserStore } from '@/store/modules/user';
 
 /**
  * 认证守卫
- * @param router 
+ * @param router
  */
 export function createAuthGuard(router: Router): void {
   router.beforeEach((to, _, next) => {
@@ -16,8 +16,7 @@ export function createAuthGuard(router: Router): void {
 
     userStore
       .getUserInfo()
-      .then((res) => {
-        console.log('res', res);
+      .then(() => {
         next();
       })
       .catch(() => {

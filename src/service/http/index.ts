@@ -45,7 +45,7 @@ export class HttpClient {
 
     return {
       ...config,
-      data: qs.stringify(config.data, { arrayFormat: 'brackets' }),
+      data: qs.stringify(config.data, { arrayFormat: 'brackets' })
     };
   }
 
@@ -75,7 +75,11 @@ export class HttpClient {
     return this.request(url, { ...config, method: 'DELETE' }, options);
   }
 
-  request<T = unknown>(url: string, config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
+  request<T = unknown>(
+    url: string,
+    config: AxiosRequestConfig,
+    options?: RequestOptions
+  ): Promise<T> {
     let conf: CreateOptions = cloneDeep(config);
 
     const transform = this.getTransform();
@@ -93,7 +97,7 @@ export class HttpClient {
     conf = this.supportFormData(conf);
 
     conf.url = url;
-    
+
     return new Promise((resolve, reject) => {
       this.axiosInstance
         .request<unknown, AxiosResponse<Result>>(conf)
@@ -107,7 +111,7 @@ export class HttpClient {
             }
             return;
           }
-          resolve((res as unknown) as Promise<T>);
+          resolve(res as unknown as Promise<T>);
         })
         .catch((e: Error) => {
           if (requestCatchHook && isFunction(requestCatchHook)) {
@@ -145,11 +149,10 @@ export class HttpClient {
       data: formData,
       headers: {
         'Content-type': 'multipart/form-data;charset=UTF-8',
-        ignoreCancelToken: true,
-      },
+        ignoreCancelToken: true
+      }
     });
   }
-
 
   /**
    * @description:
@@ -175,7 +178,7 @@ export class HttpClient {
       requestInterceptors,
       requestInterceptorsCatch,
       responseInterceptors,
-      responseInterceptorsCatch,
+      responseInterceptorsCatch
     } = transform;
 
     const axiosCanceler = new HttpClientCanceler();
@@ -184,7 +187,7 @@ export class HttpClient {
     this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
       //  是否可取消
       const {
-        headers: { ignoreCancelToken },
+        headers: { ignoreCancelToken }
       } = config;
 
       const ignoreCancel =

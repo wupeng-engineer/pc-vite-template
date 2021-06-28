@@ -1,16 +1,16 @@
-import { RouteRecordRaw, RouterView } from 'vue-router';
+import { RouteRecordRaw } from 'vue-router';
 
 const router: RouteRecordRaw = {
   path: '/account',
   name: 'account',
-  component:  () => RouterView,
+  component: () => import('@/pages/account/index.vue'),
   children: [
     {
       path: 'login',
       name: 'account-login',
-      component:  () => import('@/pages/account/login/index.vue'),
-    },
-  ],
+      component: () => import('@/pages/account/login/index.vue')
+    }
+  ]
 };
 
 export default router;

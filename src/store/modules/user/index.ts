@@ -6,7 +6,7 @@ export const useUserStore = defineStore({
   getters: {
     getToken(state): string {
       return state.token;
-    },
+    }
   },
 
   actions: {
@@ -15,7 +15,7 @@ export const useUserStore = defineStore({
      * @returns
      */
     getUserInfo(): Promise<string> {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         if (this.token) {
           resolve(this.token);
           return;
@@ -37,8 +37,8 @@ export const useUserStore = defineStore({
      * 登出
      * @param goLogin
      */
-    logout(goLogin = false) {
+    logout() {
       // goLogin && router.push(PageEnum.BASE_LOGIN);
-    },
-  },
+    }
+  }
 });

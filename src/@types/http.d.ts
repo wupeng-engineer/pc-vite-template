@@ -43,8 +43,6 @@ export interface UploadFileParams {
   [key: string]: unknown;
 }
 
+export type RequestConfig = AxiosRequestConfig;
 
-export type RequestConfig = AxiosRequestConfig
-
-
-export type HttpClientResponse<T> = AxiosResponse<T>
+export type HttpClientResponse<T> = AxiosResponse<T>;

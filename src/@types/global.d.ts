@@ -37,14 +37,11 @@ declare type Indexable<T = unknown> = {
   [key: string]: T;
 };
 
-
 declare type ValueType = string | number | boolean | undefined | null;
 
 declare type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
 
 declare type XOR<T, U> = T | U extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
-
-
 
 declare interface Fn<T = unknown, R = T> {
   (...arg: T[]): R;

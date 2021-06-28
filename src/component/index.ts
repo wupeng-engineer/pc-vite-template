@@ -25,7 +25,7 @@ function injectComponents(app: App<Element>) {
 
       return {
         name: componentName,
-        component: component,
+        component: component
       };
     })
     .filter((c) => !!c)

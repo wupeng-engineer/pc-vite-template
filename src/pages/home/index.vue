@@ -1,8 +1,6 @@
 <template>
-  <h1 class="text-2xl text-blue-400">
-    This is home
-  </h1>
- 
+  <h1 class="text-2xl text-blue-400">This is home</h1>
+
   <counter />
 
   <router-view />
@@ -11,10 +9,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-  components: {
-  },
-  setup() {
-
-  },
+  components: {},
+  setup() {}
 });
 </script>

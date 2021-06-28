@@ -1,7 +1,7 @@
 import { UserConfigExport } from 'vite';
 import { merge } from 'webpack-merge';
 import visualizer from 'rollup-plugin-visualizer';
-import optimizeLodashImports from "rollup-plugin-optimize-lodash-imports";
+import optimizeLodashImports from 'rollup-plugin-optimize-lodash-imports';
 import baseConfig from './vite.base';
 let viteConfig = merge<UserConfigExport>(baseConfig, {
   mode: 'production',

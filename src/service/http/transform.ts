@@ -1,4 +1,4 @@
-import { RequestConfig, RequestOptions, Result ,HttpClientResponse } from '@/@types/http';
+import { RequestConfig, RequestOptions, Result, HttpClientResponse } from '@/@types/http';
 
 export interface CreateOptions extends RequestConfig {
   authenticationScheme?: string;
@@ -6,7 +6,6 @@ export interface CreateOptions extends RequestConfig {
   transform?: HttpClientTransform;
   requestOptions?: RequestOptions;
 }
-
 
 export abstract class HttpClientTransform {
   /**
@@ -27,10 +26,7 @@ export abstract class HttpClientTransform {
   /**
    * @description: 请求之前的拦截器
    */
-  requestInterceptors?: (
-    config: RequestConfig,
-    options: CreateOptions
-  ) => RequestConfig;
+  requestInterceptors?: (config: RequestConfig, options: CreateOptions) => RequestConfig;
 
   /**
    * @description: 请求之后的拦截器

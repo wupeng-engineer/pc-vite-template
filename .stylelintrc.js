@@ -11,6 +11,7 @@ module.exports = {
     'indentation': 2,
     'color-hex-case': 'lower',
     'color-hex-length': 'short',
+    'no-empty-source': null,
     'max-nesting-depth': 5
   }
 };

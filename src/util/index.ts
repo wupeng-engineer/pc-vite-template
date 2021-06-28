@@ -2,17 +2,22 @@ import { isNil } from 'ramda';
 import { isNumeric } from './extensions/type';
 
 interface IRewriteFuncOption {
-    timer: number;
-    lastArgs: Array<Object>;
+  timer: number;
+  lastArgs: Array<Object>;
 }
 
 interface IRewriteFunc {
-    (...args: Array<Object>): void;
+  (...args: Array<Object>): void;
 
-    options: IRewriteFuncOption;
+  options: IRewriteFuncOption;
 }
 
-function getWrapper (debounceTime: number, originalMethod: Function, that?: Object, timer?: number): IRewriteFunc {
+function getWrapper(
+  debounceTime: number,
+  originalMethod: Function,
+  that?: Object,
+  timer?: number
+): IRewriteFunc {
   const options: IRewriteFuncOption = {
     timer: undefined,
     lastArgs: []
@@ -21,7 +26,7 @@ function getWrapper (debounceTime: number, originalMethod: Function, that?: Obje
   //  如果传入了timer,将传入timer赋值 option.timer, 进行清除
   !isNil(timer) && (options.timer = timer);
 
-  let rewriteFunc = <IRewriteFunc> function (...args: Array<Object>) {
+  let rewriteFunc = <IRewriteFunc>function (...args: Array<Object>) {
     //  缓存本次参数
     options.lastArgs = args;
 
@@ -29,10 +34,8 @@ function getWrapper (debounceTime: number, originalMethod: Function, that?: Obje
 
     options.timer = window.setTimeout(() => {
       // @ts-ignore
-      originalMethod.apply(this,
-        args);
-    },
-    debounceTime);
+      originalMethod.apply(this, args);
+    }, debounceTime);
   };
 
   //  绑定this
@@ -43,44 +46,40 @@ function getWrapper (debounceTime: number, originalMethod: Function, that?: Obje
   return rewriteFunc;
 }
 
-function defineProperty (debounceTime: number, target: object, name: string) {
+function defineProperty(debounceTime: number, target: object, name: string) {
   let wrapperFunc: IRewriteFunc;
 
-  Object.defineProperty(target,
-    name,
-    {
-      configurable: true,
-      enumerable: false,
-      get () {
-        return wrapperFunc;
-      },
-      set (value) {
-        wrapperFunc = getWrapper(debounceTime,
-          value,
-          this);
-      }
-    });
+  Object.defineProperty(target, name, {
+    configurable: true,
+    enumerable: false,
+    get() {
+      return wrapperFunc;
+    },
+    set(value) {
+      wrapperFunc = getWrapper(debounceTime, value, this);
+    }
+  });
 }
 
-function modifyDescriptor (debounceTime: number, descriptor: PropertyDescriptor) {
+function modifyDescriptor(debounceTime: number, descriptor: PropertyDescriptor) {
   const originalMethod = descriptor.value;
 
-  descriptor.value = getWrapper(debounceTime,
-    originalMethod);
+  descriptor.value = getWrapper(debounceTime, originalMethod);
   return descriptor;
 }
 
-function createDebounce (debounceTime: number, target: object, name: string, descriptor?: PropertyDescriptor) {
-  isNil(descriptor) && (descriptor = Object.getOwnPropertyDescriptor(target,
-    name));
+function createDebounce(
+  debounceTime: number,
+  target: object,
+  name: string,
+  descriptor?: PropertyDescriptor
+) {
+  isNil(descriptor) && (descriptor = Object.getOwnPropertyDescriptor(target, name));
 
   if (!isNil(descriptor)) {
-    return modifyDescriptor(debounceTime,
-      descriptor);
+    return modifyDescriptor(debounceTime, descriptor);
   } else {
-    defineProperty(debounceTime,
-      target,
-      name);
+    defineProperty(debounceTime, target, name);
   }
 }
 
@@ -88,7 +87,7 @@ function createDebounce (debounceTime: number, target: object, name: string, des
  *  使用 :: 绑定调用时, 不可 undefined :: debounce()
  * @param debounceTime
  */
-export function debounce (debounceTime = 5000): PropertyDescriptor | Function {
+export function debounce(debounceTime = 5000): PropertyDescriptor | Function {
   // @ts-ignore
   if (this !== undefined) {
     //  当存在this时，说明使用的是 :: 调用方式 this代表执行的fun
@@ -111,10 +110,7 @@ export function debounce (debounceTime = 5000): PropertyDescriptor | Function {
 
   if (isNumeric(debounceTime)) {
     return function (target: Object, name: string, descriptor?: PropertyDescriptor) {
-      return createDebounce(debounceTime,
-        target,
-        name,
-        descriptor);
+      return createDebounce(debounceTime, target, name, descriptor);
     };
   }
 
@@ -127,8 +123,5 @@ export function debounce (debounceTime = 5000): PropertyDescriptor | Function {
   const descriptor: PropertyDescriptor = arguments.length >= 3 ? arguments[2] : undefined;
   debounceTime = 1000;
 
-  return createDebounce(debounceTime,
-    target,
-    name,
-    descriptor);
+  return createDebounce(debounceTime, target, name, descriptor);
 }

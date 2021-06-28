@@ -9,24 +9,23 @@ module.exports = {
   },
 
   extends: [
-    'eslint:recommended',
     'plugin:vue/vue3-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:jest/recommended',
-    'plugin:jest/style'
+    'plugin:jest/style',
+    'plugin:prettier/recommended'
   ],
+
   parser: 'vue-eslint-parser',
   //  解析器配置
   parserOptions: {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
     ecmaVersion: 2021,
-    project: [
-      './tsconfig.json'
-    ],
-    extraFileExtensions: [
-      `.vue`
-    ],
+    ecmaFeatures: {
+      jsx: true
+    },
+    extraFileExtensions: [`.vue`, '.tsx'],
     vueFeatures: {
       interpolationAsNonHTML: true
     }
@@ -48,13 +47,12 @@ module.exports = {
     'no-var': 2,
     'no-eval': 2,
     'no-alert': process.env.NODE_ENV !== 'production' ? 0 : 2,
-    'no-console': process.env.NODE_ENV !== 'production' ? 0 : [1, { 'allow': ['warn', 'error'] }],
+    'no-console': process.env.NODE_ENV !== 'production' ? 0 : [1, { allow: ['warn', 'error'] }],
     'no-restricted-syntax': 2,
     'no-script-url': 2,
     'no-self-compare': 2,
-    indent: [2, 2],
     quotes: [2, 'single', { avoidEscape: true, allowTemplateLiterals: true }],
-    eqeqeq: [2, 'always', { 'null': 'ignore' }],
+    eqeqeq: [2, 'always', { null: 'ignore' }],
     semi: [2, 'always', { omitLastInOneLineBlock: true }],
     'prefer-rest-params': 1,
     'object-curly-spacing': [2, 'always'],
@@ -76,25 +74,28 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 2,
     '@typescript-eslint/no-inferrable-types': 2,
     'vue/require-default-prop': 0,
-    'vue/eqeqeq': [2, 'always', { 'null': 'ignore' }],
-    'vue/max-attributes-per-line': [0, {
-      'singleline': 1,
-      'multiline': {
-        'max': 1,
-        'allowFirstLine': false
+    'vue/eqeqeq': [2, 'always', { null: 'ignore' }],
+    'vue/max-attributes-per-line': [
+      0,
+      {
+        singleline: 1,
+        multiline: {
+          max: 1,
+          allowFirstLine: false
+        }
       }
-    }],
+    ],
 
-    'jest/consistent-test-it': [2, { fn: 'it'}],
+    'jest/consistent-test-it': [2, { fn: 'it' }],
     'jest/no-disabled-tests': 1,
     'jest/no-focused-tests': 2,
     'jest/no-identical-title': 2,
     'jest/prefer-to-have-length': 1,
     'jest/valid-describe': 2,
     'jest/valid-expect': 2,
-    'jest/valid-expect-in-promise':2,
+    'jest/valid-expect-in-promise': 2
   },
 
-  'noInlineConfig': false,
-  'reportUnusedDisableDirectives': false
+  noInlineConfig: false,
+  reportUnusedDisableDirectives: false
 };

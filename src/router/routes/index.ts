@@ -25,8 +25,8 @@ export const routes: Array<RouteRecordRaw> = [
   ...moduleRoutes,
   {
     path: '/',
-    redirect: '/home',
-  },
+    redirect: '/home'
+  }
 ];
 
 export default routes;
