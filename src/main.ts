@@ -17,5 +17,6 @@ setupRouter(app);
 setupStore(app);
 
 //  等待router
-await isReady();
-app.mount('#app');
+isReady().then(() => {
+  app.mount('#app');
+});
