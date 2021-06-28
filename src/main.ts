@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
-import { setupComponent } from '@/component';
 import { setupStore } from '@/store';
+import { setupComponent } from '@/component';
+import { setupDirective } from '@/directive';
 import { isReady, setupRouter } from '@/router';
 import App from './app.vue';
 import '@/assets/styles/index.less';
@@ -8,6 +9,8 @@ import '@/assets/styles/index.less';
 const app = createApp(App);
 
 setupComponent(app);
+
+setupDirective(app);
 
 setupRouter(app);
 

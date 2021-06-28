@@ -1,13 +1,13 @@
 import { flatMap, isArray } from 'lodash';
 import { XOR } from '@/@types/global';
 import { moduleFilter } from '@/util/helper';
-import { AppRouteRecordRaw } from '../types';
+import { RouteRecord, RouteRecordRaw } from 'vue-router';
 
 /**
  * 遍历moduleRoutes
  * @returns
  */
-const findModuleRoutes = (): Array<AppRouteRecordRaw> => {
+const findModuleRoutes = (): Array<RouteRecord> => {
   const modules = moduleFilter(import.meta.globEager('./modules/*/*.ts'));
 
   return flatMap(
@@ -21,7 +21,7 @@ const findModuleRoutes = (): Array<AppRouteRecordRaw> => {
 
 const moduleRoutes = findModuleRoutes();
 
-export const routes: Array<AppRouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   ...moduleRoutes,
   {
     path: '/',

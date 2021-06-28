@@ -1,6 +1,5 @@
 import { Router } from 'vue-router';
 import { useUserStore } from '@/store/modules/user';
-import { AppRouteRecordRaw } from '@/router/types';
 
 /**
  * 认证守卫
@@ -8,8 +7,7 @@ import { AppRouteRecordRaw } from '@/router/types';
  */
 export function createAuthGuard(router: Router): void {
   router.beforeEach((to, _, next) => {
-    const auth = (to as AppRouteRecordRaw)?.meta?.auth;
-    if (!auth) {
+    if (!to?.meta?.auth) {
       next();
       return;
     }

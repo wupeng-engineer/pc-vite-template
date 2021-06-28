@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Component } from 'vue';
 import { moduleFilter } from '@/util/helper';
 
 function injectComponents(app: App<Element>) {
@@ -11,7 +11,7 @@ function injectComponents(app: App<Element>) {
 
   Object.keys(modules)
     .map((key) => {
-      const component = modules[key].default;
+      const component = modules[key].default as Component;
       if (!component) return null;
 
       const fileMatch = key.match(componentRegex);

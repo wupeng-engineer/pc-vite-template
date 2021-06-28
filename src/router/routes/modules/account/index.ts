@@ -1,6 +1,6 @@
-import { AppRouteRecordRaw } from '@/router/types';
+import { RouteRecordRaw } from 'vue-router';
 
-const router: AppRouteRecordRaw = {
+const router: RouteRecordRaw = {
   path: '/account',
   name: 'account',
   component:  () => import('@/pages/account/index.vue'),
