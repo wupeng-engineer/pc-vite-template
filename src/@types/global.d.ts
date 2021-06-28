@@ -17,6 +17,7 @@ declare type DeepPartial<T> = {
 };
 
 declare type TimeoutHandle = ReturnType<typeof setTimeout>;
+
 declare type IntervalHandle = ReturnType<typeof setInterval>;
 
 export type Writable<T> = {
@@ -24,6 +25,7 @@ export type Writable<T> = {
 };
 
 declare type Nullable<T> = T | null;
+
 declare type NonNullable<T> = T extends null | undefined ? never : T;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare type Recordable<T = any> = Record<string, T>;

@@ -1,5 +1,5 @@
 <template>
-  <input v-number-input type="text">
+  <input v-number type="text">
 </template>
 
 <script lang="ts">

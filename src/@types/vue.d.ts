@@ -1,8 +1,6 @@
 export {};
 declare module 'vue' {
-  interface RouteMeta extends Record<string | number | symbol, unknown> {
-    title?: string;
-    auth?: boolean;
-    roles?: Array<number>;
+  export interface ObjectDirective<T = any, V = any>{
+    name?: string
   }
 }

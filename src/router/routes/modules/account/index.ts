@@ -1,9 +1,9 @@
-import { RouteRecordRaw } from 'vue-router';
+import { RouteRecordRaw, RouterView } from 'vue-router';
 
 const router: RouteRecordRaw = {
   path: '/account',
   name: 'account',
-  component:  () => import('@/pages/account/index.vue'),
+  component:  () => RouterView,
   children: [
     {
       path: 'login',
