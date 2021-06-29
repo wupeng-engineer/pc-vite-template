@@ -28,38 +28,21 @@
     //  非相对路径中跟目录
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "types": ["vite/client"],
+    "types": ["vite/client", "jest"],
     "sourceMap": false,
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": false,
     "esModuleInterop": true,
     //  类型声明文件的查找地址
-    "typeRoots": [
-      "node_modules/@types",
-      "src/@types"
-    ],
-    "plugins": [],
+    "typeRoots": ["node_modules/@types", "src/@types"],
 
     //  引入的库文件
-    "lib": [
-      "es5",
-      "es6",
-      "es7",
-      "dom",
-      "esnext",
-      "dom.iterable",
-    ]
+    "lib": ["es5", "es6", "es7", "dom", "esnext", "dom.iterable"]
   },
   //  排除编译的文件
-  "exclude": [
-    "node_modules",
-    "build",
-    "src/assets/json/*.json"
-  ],
+  "exclude": ["node_modules", "build", "src/assets/json/*.json"],
   //  包含编译的入口文件
   "include": [
     "src/**/*.ts",

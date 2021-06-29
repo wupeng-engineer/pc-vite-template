@@ -10,6 +10,6 @@ module.exports = {
   jsxBracketSameLine: true,
   Tabs: true,
   tabWidth: 2,
-  endOfLine:"auto",
+  endOfLine: 'auto',
   autoSave: true
 };

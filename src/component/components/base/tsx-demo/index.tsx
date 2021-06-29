@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import './index.css';
+import css from './index.module.less';
 export default defineComponent({
   props: {
     msg: {
@@ -18,7 +18,7 @@ export default defineComponent({
             onClick={() => {
               console.log(s);
             }}
-            class='li'>
+            class={css.li}>
             {s}
           </li>
         ))}

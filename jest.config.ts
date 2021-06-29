@@ -1,4 +1,4 @@
-import { defaults as  tsjPreset } from 'ts-jest/presets';
+import { defaults as tsjPreset } from 'ts-jest/presets';
 
 export default {
   preset: 'ts-jest',
@@ -6,17 +6,12 @@ export default {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
-  roots: [
-    "<rootDir>/test/"
-  ],
+  roots: ['<rootDir>/test/'],
   transform: {
     ...tsjPreset.transform,
     '.*\\.(vue)$': 'vue-test'
     // [...]
   },
 
-  moduleFileExtensions: ['ts', 'tsx', 'vue-test' ,'js', 'jsx', 'json', 'node'],
-
-
-
+  moduleFileExtensions: ['ts', 'tsx', 'vue-test', 'js', 'jsx', 'json', 'node']
 };
