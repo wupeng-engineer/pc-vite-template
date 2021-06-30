@@ -3,7 +3,7 @@ import { moduleFilter } from '@/util/helper';
 
 function injectComponents(app: App<Element>) {
   const modules = moduleFilter<{ default: { name?: string } }>(
-    import.meta.globEager('./components/**/*.{vue,tsx,jsx}')
+    import.meta.globEager('./modules/**/*.{vue,tsx,jsx}')
   );
 
   //  匹配文件名称的正则
