@@ -1,4 +1,4 @@
-declare let __DEV__: boolean;
+declare let _DEV_: boolean;
 
 declare module '*.json' {
   const value: unknown;

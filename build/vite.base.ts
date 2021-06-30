@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import viteAntdDayjs from 'vite-plugin-antd-dayjs';
 import { resolve } from './config';
 export default defineConfig({
   css: {
@@ -22,8 +23,8 @@ export default defineConfig({
     vueJsx({
       optimize: true,
       transformOn: true
-      // options are passed on to @vue/babel-plugin-jsx
-    })
+    }),
+    viteAntdDayjs()
   ],
 
   resolve: {

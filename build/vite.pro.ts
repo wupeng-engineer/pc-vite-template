@@ -1,17 +1,27 @@
 import { UserConfigExport } from 'vite';
 import { merge } from 'webpack-merge';
 import visualizer from 'rollup-plugin-visualizer';
+import styleImport from 'vite-plugin-style-import';
 import optimizeLodashImports from 'rollup-plugin-optimize-lodash-imports';
 import baseConfig from './vite.base';
 let viteConfig = merge<UserConfigExport>(baseConfig, {
   mode: 'production',
   plugins: [
     //legacy()
+    styleImport({
+      libs: [
+        {
+          libraryName: 'ant-design-vue',
+          esModule: true,
+          resolveStyle: (name) => {
+            return `ant-design-vue/es/${name}/style/index`;
+          }
+        }
+      ]
+    })
   ],
 
-  define: {
-    '__DEV__': false
-  },
+  define: {},
 
   build: {
     terserOptions: {
@@ -41,12 +51,14 @@ if (process.env.npm_config_report) {
   viteConfig = merge(viteConfig, {
     build: {
       rollupOptions: {
-        plugins: [visualizer({
-          open: true,
-          gzipSize: true,
-          brotliSize: true,
-          template: 'treemap' // "sunburst" | "treemap" | "network"
-        })],
+        plugins: [
+          visualizer({
+            open: true,
+            gzipSize: true,
+            brotliSize: true,
+            template: 'treemap' // "sunburst" | "treemap" | "network"
+          })
+        ]
       }
     }
   });
