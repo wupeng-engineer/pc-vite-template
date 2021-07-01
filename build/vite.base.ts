@@ -22,7 +22,6 @@ export default defineConfig({
     vueJsx({
       optimize: true,
       transformOn: true
-      // options are passed on to @vue/babel-plugin-jsx
     })
   ],
 

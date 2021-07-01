@@ -9,9 +9,7 @@ let viteConfig = merge<UserConfigExport>(baseConfig, {
     //legacy()
   ],
 
-  define: {
-    '__DEV__': false
-  },
+  define: {},
 
   build: {
     terserOptions: {
@@ -41,12 +39,14 @@ if (process.env.npm_config_report) {
   viteConfig = merge(viteConfig, {
     build: {
       rollupOptions: {
-        plugins: [visualizer({
-          open: true,
-          gzipSize: true,
-          brotliSize: true,
-          template: 'treemap' // "sunburst" | "treemap" | "network"
-        })],
+        plugins: [
+          visualizer({
+            open: true,
+            gzipSize: true,
+            brotliSize: true,
+            template: 'treemap' // "sunburst" | "treemap" | "network"
+          })
+        ]
       }
     }
   });

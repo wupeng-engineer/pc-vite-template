@@ -4,9 +4,7 @@ import baseConfig from './vite.base';
 
 export default merge<UserConfigExport>(baseConfig, {
   mode: 'development',
-  define: {
-    '__DEV__': true
-  },
+  define: {},
 
   server: {
     open: true
